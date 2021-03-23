@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('password', 60);
             $table->string('activation_key', 60)->nullable();
             $table->boolean('isActive')->default(0);
+            $table->boolean('isAdmin')->default(0);
+            $table->rememberToken();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();

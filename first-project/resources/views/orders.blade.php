@@ -4,29 +4,30 @@
     <div class="container">
         <div class="bg-content">
             <h2>Siparişler</h2>
-            <p>Henüz siparişiniz yok</p>
-            <table class="table table-bordererd table-hover">
-                <tr>
-                    <th>Sipariş Kodu</th>
-                    <th>Sipariş Tarihi</th>
-                    <th>KDV</th>
-                    <th>Kargo</th>
-                    <th>Toplam Tutar</th>
-                    <th>Durum</th>
-                    <th>İşlem</th>
-                </tr>
-                <tr>
-                    <td>SP-00123</td>
-                    <td>25.09.2017</td>
-                    <td>2.99</td>
-                    <td>0</td>
-                    <td>18.99</td>
-                    <td>
-                        Sipariş alındı, <br> Onaylandı, <br> Kargoya verildi, <br> Bir sorun var. İletişime geçin!
-                    </td>
-                    <td><a href="#" class="btn btn-sm btn-success">Detay</a></td>
-                </tr>
-            </table>
+            @if(count($orders) == 0 ) 
+                <p>Henüz siparişiniz yok</p>
+            @else
+                <table class="table table-bordererd table-hover">
+                    <tr>
+                        <th>Sipariş Kodu</th>
+                        <th>Tutar</th>
+                        <th>Toplam Ürün</th>
+                        <th>Durum</th>
+                        <th></th>
+                    </tr>
+                    @foreach ($orders as $order)
+                        <tr>
+                            <td>SP-{{ $order->id }}</td>
+                            <td>{{ $order->price * ((100+config('cart.tax'))/100) }} ₺</td>
+                            <td> {{ $order->cart->cart_product_piece() }}</td>
+                            <td>
+                                {{ $order->statu }}
+                            </td>
+                            <td><a style="background:#004684 !important; " href="{{ route('order_detail', $order->id) }}" class="btn btn-sm btn-info">Detay</a></td>
+                        </tr>
+                    @endforeach
+                </table>
+            @endif
         </div>
     </div>
 @endsection

@@ -55,7 +55,11 @@
                                 <a href="{{ route('product', $product->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
                                 <p><a href="{{ route('product', $product->slug) }}">{{ $product->product_name }}</a></p>
                                 <p class="price">{{ $product->price }} ₺</p>
-                                <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                                <form action="{{ route('add_product') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                    <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                                </form>
                             </div> 
                         @endforeach 
                         <div class="col-md-12">

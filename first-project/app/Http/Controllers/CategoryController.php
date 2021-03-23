@@ -11,8 +11,6 @@ class CategoryController extends Controller
         $category = Category::where('slug', $slug_category)->firstOrFail();
         $subCategories = Category::where('parent_id', $category->id)->get();
 
-
-
         $order = request('order');
         if ($order == 'best_seller') {
             $products = $category->products()
@@ -24,6 +22,7 @@ class CategoryController extends Controller
         } else {
             $products = $category->products()->distinct()->paginate(4);
         }
+
         return view('category', compact('category', 'subCategories', 'products'));
     }
 }

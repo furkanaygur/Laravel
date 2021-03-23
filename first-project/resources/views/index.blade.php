@@ -1,6 +1,7 @@
 @extends('layout.master')
 @section('title','index')
 @section('content')  
+    @include('layout.partials.alert')
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -8,7 +9,9 @@
                     <div class="panel-heading">Kategoriler</div>
                     <div class="list-group categories">
                         @foreach ($categories as $category)
-                            <a href="{{ route('category', $category->slug) }}" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> {{$category->category_name}}</a> 
+                            @if ($category->products->count() > 1)
+                                <a href="{{ route('category', $category->slug) }}" class="list-group-item"><i class="fa fa-arrow-circle-o-right"></i> {{$category->category_name}}</a>   
+                            @endif
                         @endforeach
                     </div>
                 </div>
@@ -17,7 +20,7 @@
                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                     <ol class="carousel-indicators">
                         @for ($i = 0; $i<count($product_slider);$i++)
-                        <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : null }}"></li>
+                            <li data-target="#carousel-example-generic" data-slide-to="{{ $i }}" class="{{ $i == 0 ? 'active' : null }}"></li>
                         @endfor
                     </ol>
                     <div class="carousel-inner" role="listbox">
@@ -43,11 +46,18 @@
             <div class="col-md-3">
                 <div class="panel panel-default" id="sidebar-product">
                     <div class="panel-heading">Günün Fırsatı</div>
-                    <div class="panel-body">
+                    <div class="panel-body opportunity">
                         <a href="{{ route('product',$product_opportunity->slug) }}">
                             <img src="http://via.placeholder.com/400x400?text=ProductPic" class="img-responsive">
                         </a>
-                        {{ $product_opportunity->product_name }} 
+                        <div style="margin-top: .75rem">
+                            <a href="{{ route('product',  $product_opportunity->slug) }}"> {{ $product_opportunity->product_name }} </a>
+                            <form action="{{ route('add_product') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="hidden" name="id" value="{{ $p->id }}">
+                                <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -64,6 +74,11 @@
                                 <a href="{{ route('product', $p->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
                                 <p><a href="{{ route('product', $p->slug) }}">{{ $p->product_name }}</a></p>
                                 <p class="price">{{ $p->price }} ₺</p>
+                                <form action="{{ route('add_product') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $p->id }}">
+                                    <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                                </form>
                             </div>
                         @endforeach
                     </div>
@@ -80,6 +95,11 @@
                                 <a href="{{ route('product', $p->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
                                 <p><a href="{{ route('product', $p->slug) }}">{{ $p->product_name }}</a></p>
                                 <p class="price">{{ $p->price }} ₺</p>
+                                <form action="{{ route('add_product') }}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="hidden" name="id" value="{{ $p->id }}">
+                                    <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                                </form>
                             </div>
                         @endforeach
                     </div>

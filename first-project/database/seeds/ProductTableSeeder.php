@@ -32,6 +32,11 @@ class ProductTableSeeder extends Seeder
                 'display_best_seller' => rand(0, 1),
                 'display_discount' => rand(0, 1)
             ]);
+
+            $category_product = DB::table('category_product')->insert([
+                'category_id' => rand(1, 15),
+                'product_id' => rand(1, 30)
+            ]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS = 1;');
     }

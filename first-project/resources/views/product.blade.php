@@ -29,7 +29,11 @@
                 <div class="col-md-7">
                     <h1>{{ $product->product_name }}</h1>
                     <p class="price">{{ $product->price }} ₺</p>
-                    <p><a href="#" class="btn btn-theme">Sepete Ekle</a></p>
+                    <form action="{{ route('add_product') }}" method="POST">
+                        {{ csrf_field() }}
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="submit" class="btn btn-theme" value="Sepete Ekle">
+                    </form>
                 </div>
             </div>
 

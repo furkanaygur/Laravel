@@ -10,7 +10,8 @@ class IndexController extends Controller
 {
     public function index()
     {
-        $categories = Category::whereRaw('parent_id is null')->take(8)->get();
+        $categories = Category::whereRaw('parent_id is null')
+            ->with('products')->take(8)->get();
 
         $product_slider = Product::select('product.*')
             ->join('product_detail', 'product_detail.product_id', 'product.id')
