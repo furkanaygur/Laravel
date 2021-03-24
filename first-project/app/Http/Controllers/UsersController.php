@@ -32,8 +32,12 @@ class UsersController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')], request()->has('remember_me'))) {
+        $credentials = [
+            'email' => request('email'),
+            'password' => request('password'),
+            'isActive' => 1
+        ];
+        if (Auth::attempt($credentials, request()->has('remember_me'))) {
             request()->session()->regenerate();
 
             $cart_id = ShoppingCart::cart_id();

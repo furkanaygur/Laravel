@@ -18,7 +18,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#">Home</a>
+                    <a href="{{ route('admin.index') }}">Home</a>
                 </li>
                 <li>
                     <a href="#">Settings</a>
@@ -35,7 +35,10 @@
                         </li>
                         <li role="separator" class="divider"></li>
                         <li>
-                            <a href="#">Logout</a>
+                            <form action="{{ route('admin.logout') }}" method="POST">
+                                {{ csrf_field() }}
+                                <input type="submit" class="btn btn-danger" value="Logout">
+                            </form>
                         </li>
                     </ul>
                 </li>

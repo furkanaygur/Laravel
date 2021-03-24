@@ -5,8 +5,7 @@
     <div class="jumbotron text-center">
         <h1>404</h1>
         <h2>Page Not Found</h2>
-        <a href="{{ route('index') }}" class="btn btn-danger">Home</a>
-
+        <a href="{{ route('index') }}"  style="background: #004684 !important;" class="btn btn-info">Home</a>
     </div>
 </div>
 @endsection
