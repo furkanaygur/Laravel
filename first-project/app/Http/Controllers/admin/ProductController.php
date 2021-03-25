@@ -4,7 +4,9 @@ namespace App\Http\Controllers\admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductDetail;
 
 class ProductController extends Controller
 {
@@ -26,13 +28,15 @@ class ProductController extends Controller
     public function form($id = 0)
     {
         $product = new Product;
+        $product_categories = [];
         if ($id > 0) {
             $product = Product::find($id);
+            $product_categories = $product->categories()->pluck('category_id')->all();
         }
 
-        $all_categories = Product::all();
+        $all_categories = Category::all();
 
-        return view('admin.product.form', compact('product', 'all_categories'));
+        return view('admin.product.form', compact('product', 'all_categories', 'product_categories'));
     }
 
     public function save($id = 0)
@@ -50,11 +54,36 @@ class ProductController extends Controller
             'slug' => request('original_slug') != request('slug') ? 'unique:product,slug' : ''
         ]);
 
+        $data_detail = request()->only('display_slider', 'display_opportunity', 'display_best_seller', 'display_discount');
+
+        $categories = request('categories');
+
+
         if ($id > 0) {
             $product = Product::where('id', $id)->firstOrFail();
             $product->update($data);
+            $product->detail()->update($data_detail);
+            $product->categories()->sync($categories);
         } else {
             $product = Product::create($data);
+            $product->detail()->create($data_detail);
+            $product->categories()->attach($categories);
+        }
+
+        if (request()->hasFile('product_image')) {
+            $this->validate(request(), [
+                'product_image' => 'image | mimes: png,jpg,jpeg,gif | max:2048'
+            ]);
+
+            $product_image = request()->file('product_image');
+            $file_name = $product->id . '-' . time() . '.' . $product_image->extension();
+            if ($product_image->isValid()) {
+                $product_image->move('uploads/product/', $file_name);
+                ProductDetail::updateOrCreate(
+                    ['product_id' => $product->id],
+                    ['product_image' => $file_name]
+                );
+            }
         }
 
         $message = $id > 0 ? 'Product Updated' : 'Product Added';
@@ -66,7 +95,7 @@ class ProductController extends Controller
     public function delete($id)
     {
         $product = Product::find($id);
-        // $product->detail->detach();
+        $product->categories()->detach();
         $product->delete();
 
         return redirect()->route('admin.products')

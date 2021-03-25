@@ -26,7 +26,7 @@
                     <div class="carousel-inner" role="listbox">
                         @foreach ($product_slider as $index => $p)
                             <div class="item {{ $index == 1 ? 'active' : null }}">
-                                <img src="http://via.placeholder.com/650x400?text=ProductPic" alt="...">
+                                <img style="min-width: 100%" src="{{ $p->detail->product_image != null ? asset('uploads/product/'. $p->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $p->product_name }}">
                                 <div class="carousel-caption">
                                     <a href="{{ route('product',$p->slug) }}"> {{$p->product_name}}</a>
                                 </div>
@@ -48,7 +48,7 @@
                     <div class="panel-heading">Günün Fırsatı</div>
                     <div class="panel-body opportunity">
                         <a href="{{ route('product',$product_opportunity->slug) }}">
-                            <img src="http://via.placeholder.com/400x400?text=ProductPic" class="img-responsive">
+                            <img style="min-width: 100%" src="{{ $p->detail->product_image != null ? asset('uploads/product/'. $p->detail->product_image) : 'http://via.placeholder.com/400x400?text=ProductPic' }}" class="img-responsive">
                         </a>
                         <div style="margin-top: .75rem">
                             <a href="{{ route('product',  $product_opportunity->slug) }}"> {{ $product_opportunity->product_name }} </a>
@@ -71,7 +71,7 @@
                     <div class="row">
                         @foreach ($product_best_seller as $p)
                             <div class="col-md-3 product">
-                                <a href="{{ route('product', $p->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
+                                <a href="{{ route('product', $p->slug) }}"><img class="thumbnail" style="min-width: 100%" src="{{ $p->detail->product_image != null ? asset('uploads/product/'. $p->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $p->product_name }}" ></a>
                                 <p><a href="{{ route('product', $p->slug) }}">{{ $p->product_name }}</a></p>
                                 <p class="price">{{ $p->price }} ₺</p>
                                 <form action="{{ route('add_product') }}" method="POST">
@@ -92,7 +92,7 @@
                     <div class="row">
                         @foreach ($product_discount as $p)
                             <div class="col-md-3 product">
-                                <a href="{{ route('product', $p->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
+                                <a href="{{ route('product', $p->slug) }}"><img class="thumbnail" style="min-width: 100%" src="{{ $p->detail->product_image != null ? asset('uploads/product/'. $p->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $p->product_name }}" ></a>
                                 <p><a href="{{ route('product', $p->slug) }}">{{ $p->product_name }}</a></p>
                                 <p class="price">{{ $p->price }} ₺</p>
                                 <form action="{{ route('add_product') }}" method="POST">

@@ -1,7 +1,10 @@
 @extends('admin.layout.master')
+@section('head')
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+@endsection
 @section('content')
     <h1 class="page-header"> Product Management</h1>
-    <form action="{{ route('admin.product-save', @$product->id) }}" method="POST">
+    <form action="{{ route('admin.product-save', @$product->id) }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         @include('layout.partials.error')
         @include('layout.partials.alert')
@@ -54,6 +57,58 @@
                 </div>
             </div>
             @endif
+            
+        </div>
+        <div class="checkbox-container">
+            <label>
+                <input type="hidden" name="display_slider" value="0">
+                <input type="checkbox" name="display_slider" value="1" {{ old('display_slider', $product->detail->display_slider) ? 'checked' : null  }}>
+                Slider
+            </label>
+            <label>
+                <input type="hidden" name="display_opportunity" value="0">
+                <input type="checkbox" name="display_opportunity" value="1" {{ old('display_opportunity', $product->detail->display_opportunity) ? 'checked' : null  }}>
+                Opportunity
+            </label>
+            <label>
+                <input type="hidden" name="display_best_seller" value="0">
+                <input type="checkbox" name="display_best_seller" value="1" {{ old('display_best_seller', $product->detail->display_best_seller) ? 'checked' : null  }}>
+                Best Seller
+            </label>
+            <label>
+                <input type="hidden" name="display_discount" value="0">
+                <input type="checkbox" name="display_discount" value="1" {{ old('display_discount', $product->detail->display_discount) ? 'checked' : null  }}>
+                Discount
+            </label>
+        </div>
+        <div style="margin-top: 1rem" class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="product_name">Categories</label>
+                    <select name="categories[]" class="form-control" id="categories" multiple>
+                        @foreach ($all_categories as $category)
+                            <option {{ collect(old('categories', $product_categories))->contains($category->id) ? 'selected' : null }} value="{{ $category->id }}">{{ $category->category_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="product_image">Product Image</label>
+            @if($product->detail->product_image != null)
+                <img src="/uploads/product/{{ $product->detail->product_image }}" class="thumbnail pull-left" style="height: 250px; margin-right: 2rem" alt="{{ $product->product_name }}">
+            @endif
+            <input type="file" id="product_image" name="product_image">
         </div>
     </form>
+@endsection
+@section('footer')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(function(){
+            $('#categories').select2({
+                placeholder:'Please choose a category'
+            });
+        });
+    </script>
 @endsection

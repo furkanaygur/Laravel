@@ -142,3 +142,9 @@ body {
 .navbar-toggle {
     margin-left: 15px;
 }
+
+.checkbox-container {
+    label:not(:last-child) {
+        margin-right: 2rem;
+    }
+}

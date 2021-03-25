@@ -14,7 +14,7 @@
                 </tr>
                 @foreach ($order->cart->cart_product as $cart_product )
                     <tr>
-                        <td><a href="{{ route('product', $cart_product->product->slug) }}"> <img height="100" src="http://via.placeholder.com/120x100?text=ProductPic"> </a></td>
+                        <td><a href="{{ route('product', $cart_product->product->slug) }}"> <img style="min-width: 100%" src="{{ $product->detail->product_image != null ? asset('uploads/product/'. $product->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $product->product_name }}" > </a></td>
                         <td><a href="{{ route('product', $cart_product->product->slug) }}"> {{ $cart_product->product->product_name }}</a></td>
                         <td>{{ $cart_product->price }}</td>
                         <td>{{ $cart_product->piece }}</td>

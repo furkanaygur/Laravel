@@ -52,7 +52,7 @@
                     @if (count($products) != 0)
                     @foreach ($products as $product)
                             <div class="col-md-3 product">
-                                <a href="{{ route('product', $product->slug) }}"><img src="http://via.placeholder.com/400x400?text=ProductPic"></a>
+                                <a href="{{ route('product', $product->slug) }}"><img class="thumbnail" src="{{ $product->detail->product_image != null ? asset('uploads/product/'. $product->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $product->product_name }}"></a>
                                 <p><a href="{{ route('product', $product->slug) }}">{{ $product->product_name }}</a></p>
                                 <p class="price">{{ $product->price }} ₺</p>
                                 <form action="{{ route('add_product') }}" method="POST">

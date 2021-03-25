@@ -12,7 +12,7 @@
         <div class="bg-content">
             <div class="row">
                 <div class="col-md-5">
-                    <img src="http://via.placeholder.com/400x400?text=ProductPic">
+                    <img class="thumbnail" height="350" src="{{ $product->detail->product_image != null ? asset('uploads/product/'. $product->detail->product_image) : 'http://via.placeholder.com/650x400?text=ProductPic' }}" alt="{{ $product->product_name }}" >
                     <hr>
                     <div class="row">
                         <div class="col-xs-3">

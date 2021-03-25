@@ -16,6 +16,7 @@ class CreateProductDetail extends Migration
         Schema::create('product_detail', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned()->unique();
+            $table->string('product_image', 255)->nullable()->default('');
             $table->boolean('display_slider')->default(0);
             $table->boolean('display_opportunity')->default(0);
             $table->boolean('display_best_seller')->default(0);
