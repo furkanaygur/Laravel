@@ -21,6 +21,7 @@
     @include('layout.partials.alert')
     @include('layout.partials.error')
     <div class="table-responsive">
+        @if (count($users) > 0)
         <table class="table table-hover table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -54,6 +55,11 @@
                 @endforeach
             </tbody>
         </table>
+        @else
+            <div class="alert alert-warning">
+                There is nothing...
+            </div>
+        @endif
         {{ $users->links() }}
     </div>
 @endsection

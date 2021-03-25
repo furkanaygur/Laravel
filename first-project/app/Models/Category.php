@@ -17,4 +17,11 @@ class Category extends Model
     {
         return $this->belongsToMany('App\Models\Product', 'category_product');
     }
+
+    public function parent_category()
+    {
+        return $this->belongsTo('App\Models\Category', 'parent_id')->withDefault([
+            'category_name' => '-'
+        ]);
+    }
 }

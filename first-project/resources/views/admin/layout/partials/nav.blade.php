@@ -18,7 +18,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="{{ route('admin.index') }}">Home</a>
+                    <a href="{{ route('index') }}">Go To Site</a>
                 </li>
                 <li>
                     <a href="#">Settings</a>
