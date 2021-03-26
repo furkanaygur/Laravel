@@ -103,12 +103,22 @@
     </form>
 @endsection
 @section('footer')
+    <script src="//cdn.ckeditor.com/4.16.0/standard/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
         $(function(){
             $('#categories').select2({
                 placeholder:'Please choose a category'
             });
+
+            var options = {
+                resize_enabled : false,
+                filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+                filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+                filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+                filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+            }
+            CKEDITOR.replace('product_description', options)
         });
     </script>
 @endsection

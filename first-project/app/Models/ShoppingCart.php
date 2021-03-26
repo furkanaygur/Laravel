@@ -38,4 +38,9 @@ class ShoppingCart extends Model
     {
         return DB::table('cart_product')->where('cart_id', $this->id)->whereRaw('deleted_at is null')->sum('piece');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\Users');
+    }
 }

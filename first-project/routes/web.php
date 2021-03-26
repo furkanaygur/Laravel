@@ -46,6 +46,14 @@ Route::group(['prefix' => '/admin', 'namespace' => 'admin'], function () {
             Route::post('/save/{product_id?}', 'ProductController@save')->name('admin.product-save');
             Route::get('/delete/{product_id}', 'ProductController@delete')->name('admin.product-delete');
         });
+
+        Route::prefix('order')->group(function () {
+            Route::match(['get', 'post'], '/', 'OrderController@index')->name('admin.orders');
+            Route::get('/create', 'OrderController@form')->name('admin.order-create');
+            Route::get('/update/{order_id}', 'OrderController@form')->name('admin.order-update');
+            Route::post('/save/{order_id?}', 'OrderController@save')->name('admin.order-save');
+            Route::get('/delete/{order_id}', 'OrderController@delete')->name('admin.order-delete');
+        });
     });
 });
 
@@ -81,6 +89,7 @@ Route::prefix('users')->group(function () {
 
 Route::get('/payment', 'PaymentController@index')->name('payment');
 Route::post('/payment', 'PaymentController@pay')->name('payment.pay');
+
 
 // Route::get('/test/mail', function () {
 //     $user = \App\Models\Users::find(1);
