@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('login-register');
+        return view('login');
     }
 
     public function Login()

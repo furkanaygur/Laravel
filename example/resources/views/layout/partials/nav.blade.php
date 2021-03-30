@@ -15,7 +15,6 @@
                     {{ csrf_field() }}
                     <button style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Logout</button>
                   </form>
-                  
                 @endauth
               </ul>
             </div>

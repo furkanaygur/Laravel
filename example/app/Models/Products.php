@@ -12,8 +12,13 @@ class Products extends Model
 
     protected $guarded = [];
 
+    public function detail()
+    {
+        return $this->hasOne(ProductDetail::class, 'product_id');
+    }
+
     public function categories()
     {
-        return $this->belongsTo(Category::class, 'category_product', 'category_id', 'product_id');
+        return $this->belongsToMany(Category::class, 'category_product', 'category_id', 'product_id');
     }
 }

@@ -10,66 +10,21 @@
       <div id="sequence" class="seq">
         <div class="seq-screen">
           <ul class="seq-canvas">
-            <!-- single slide item -->
-            <li>
-              <div class="seq-model">
-                <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
-              </div>
-              <div class="seq-title">
-               <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Category</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>
-            <!-- single slide item -->
-            <li>
-              <div class="seq-model">
-                <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
-              </div>
-              <div class="seq-title">
-                <span data-seq>Save Up to 40% Off</span>                
-                <h2 data-seq>Category</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>
-            <!-- single slide item -->
-            <li>
-              <div class="seq-model">
-                <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
-              </div>
-              <div class="seq-title">
+            
+            @foreach ($setting['category'] as $category )
+              <!-- single slide item -->
+              <li>
+                <div class="seq-model">
+                  <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
+                </div>
+                <div class="seq-title">
                 <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Category</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>
-            <!-- single slide item -->           
-            <li>
-              <div class="seq-model">
-                <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
-              </div>
-              <div class="seq-title">
-                <span data-seq>Save Up to 75% Off</span>                
-                <h2 data-seq>Exclusive Shoes</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>
-            <!-- single slide item -->  
-             <li>
-              <div class="seq-model">
-                <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
-              </div>
-              <div class="seq-title">
-                <span data-seq>Save Up to 50% Off</span>                
-                <h2 data-seq>Best Collection</h2>                
-                <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
-                <a data-seq href="#" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
-              </div>
-            </li>                   
+                  <h2 data-seq>{{ $category->name }}</h2>                
+                  <p data-seq>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus, illum.</p>
+                  <a data-seq href="{{ route('category', $category->slug) }}" class="aa-shop-now-btn aa-secondary-btn">SHOP NOW</a>
+                </div>
+              </li>
+            @endforeach
           </ul>
         </div>
         <!-- slider navigation btn -->
@@ -103,18 +58,23 @@
                     <ul class="aa-product-catg">
                       <!-- start single product item -->
                       @foreach ($category->products()->get() as $product )
-                      <li>
-                        <figure>
-                          <a class="aa-product-img" href="#"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
-                          <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                            <figcaption>
-                            <h4 class="aa-product-title"><a href="#">{{ $product->title }}</a></h4>
-                            <span class="aa-product-price">${{ $product->price }}</span><span class="aa-product-price"><del>${{ $product->price + 5 }}</del></span>
-                          </figcaption>
-                        </figure>                        
-                        <!-- product badge -->
-                        <span class="aa-badge aa-sale" href="#">SALE!</span>
-                      </li>
+                        @if ($product->detail->in_index && $product->detail->statu != 3)
+                        <li>
+                          <figure>
+                            <a class="aa-product-img" href="{{ route('category.product',[$category->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
+                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                              <figcaption>
+                              <h4 class="aa-product-title"><a href="{{ route('category.product',[$category->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
+                              <span class="aa-product-price">${{ $product->price }}</span>
+                              @if (!is_null($product->detail->old_price))
+                                <span class="aa-product-price"><del>${{ $product->detail->old_price ?? null }}</del></span>
+                              @endif
+                            </figcaption>
+                          </figure>                        
+                          <!-- product badge -->
+                          <span class="aa-badge aa-{{ $product->detail->statu == 1 ? 'sale' : 'hot' }}">{{ $product->detail->statu == 1 ? 'SALE!' : 'HOT!' }}</span>
+                        </li>
+                        @endif
                       @endforeach
                       {{-- <!-- start single product item -->
                       <li>
