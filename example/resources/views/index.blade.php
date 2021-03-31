@@ -57,16 +57,19 @@
                   <div class="tab-pane fade in {{ $loop->first ? 'active' : null }}" id="{{ $category->name }}">
                     <ul class="aa-product-catg">
                       <!-- start single product item -->
-                      @foreach ($category->products()->get() as $product )
-                        @if ($product->detail->in_index && $product->detail->statu != 3)
+                      @foreach ($category->products as $product )
                         <li>
                           <figure>
                             <a class="aa-product-img" href="{{ route('category.product',[$category->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
-                            <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                            <form action="{{ route('cart.add') }}" method="POST">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="id" value="{{ $product->id }}">
+                              <button style="width: 100%; border: 0px; outline: none;" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</button>
+                            </form>
                               <figcaption>
                               <h4 class="aa-product-title"><a href="{{ route('category.product',[$category->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
                               <span class="aa-product-price">${{ $product->price }}</span>
-                              @if (!is_null($product->detail->old_price))
+                              @if (!is_null(isset($product->detail->old_price)))
                                 <span class="aa-product-price"><del>${{ $product->detail->old_price ?? null }}</del></span>
                               @endif
                             </figcaption>
@@ -74,35 +77,7 @@
                           <!-- product badge -->
                           <span class="aa-badge aa-{{ $product->detail->statu == 1 ? 'sale' : 'hot' }}">{{ $product->detail->statu == 1 ? 'SALE!' : 'HOT!' }}</span>
                         </li>
-                        @endif
-                      @endforeach
-                      {{-- <!-- start single product item -->
-                      <li>
-                        <figure>
-                          <a class="aa-product-img" href="#"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
-                          <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                            <figcaption>
-                            <h4 class="aa-product-title"><a href="#">Polo T-Shirt</a></h4>
-                            <span class="aa-product-price">$45.50</span><span class="aa-product-price"><del>$65.50</del></span>
-                          </figcaption>
-                        </figure>                        
-                        <!-- product badge -->
-                        <span class="aa-badge aa-hot" href="#">HOT!</span>
-                      </li>
-                      <!-- start single product item -->
-                      <li>
-                        <figure>
-                          <a class="aa-product-img" href="#"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
-                          <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                            <figcaption>
-                            <h4 class="aa-product-title"><a href="#">Polo T-Shirt</a></h4>
-                            <span class="aa-product-price">$45.50</span><span class="aa-product-price"><del>$65.50</del></span>
-                          </figcaption>
-                        </figure>                        
-                        <!-- product badge -->
-                        <span class="aa-badge aa-sold-out" href="#">SOLD OUT!</span>
-                      </li> --}}
-                                
+                      @endforeach          
                     </ul>
                   </div>
                   @endforeach

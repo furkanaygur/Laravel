@@ -23,8 +23,12 @@
                       <li>
                         <figure>
                           <a class="aa-product-img" href="{{ route('category.product',[$c->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
-                          <a class="aa-add-card-btn"href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
-                            <figcaption>
+                          <form action="{{ route('cart.add') }}" method="POST">
+                            {{ csrf_field() }}
+                            <input type="hidden" name="id" value="{{ $product->id }}">
+                            <button style="width: 100%; border: 0px; outline: none;" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</button>
+                          </form>
+                          <figcaption>
                             <h4 class="aa-product-title"><a href="{{ route('category.product',[$c->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
                             <span class="aa-product-price">${{ $product->price }}</span>
                             @if (!is_null($product->detail->old_price))

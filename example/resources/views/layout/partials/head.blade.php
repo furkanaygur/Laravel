@@ -22,3 +22,5 @@
 <!-- Google Font -->
 <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
+
+<meta name="csrf-token" content="{{ csrf_token() }}">

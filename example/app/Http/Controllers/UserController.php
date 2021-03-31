@@ -14,7 +14,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('login');
+        return view('login-register');
     }
 
     public function Login()
@@ -35,7 +35,7 @@ class UserController extends Controller
         } else {
             // $errors = ['email' => 'Could not login'];
             // return back()->withErrors($errors);
-            return redirect()->route('user.lr')
+            return redirect()->route('user.login.form')
                 ->with('message', 'Could not login. Please try again')
                 ->with('message_type', 'danger')->withInput();
         }
@@ -86,5 +86,10 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('message', 'Email address could not be verified. Please try again.')
                 ->with('message_type', 'danger');
         }
+    }
+
+    public function activation2()
+    {
+        return 'sa';
     }
 }

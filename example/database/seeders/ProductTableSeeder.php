@@ -21,7 +21,7 @@ class ProductTableSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Products::truncate();
 
-        for ($i = 0; $i < 30; $i++) {
+        for ($i = 0; $i < 300; $i++) {
             $name = $faker->name;
             $id = Products::insertGetId([
                 'title' => $name,
@@ -38,7 +38,7 @@ class ProductTableSeeder extends Seeder
 
             DB::table('category_product')->insert([
                 'category_id' => rand(1, 3),
-                'product_id' => rand(1, 30)
+                'product_id' => $id
             ]);
         }
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');

@@ -19,6 +19,8 @@
 <!-- Custom js -->
 <script src="/js/assets/custom.js"></script> 
 
+<script src="/js/app.js"></script>
+
 <script>
     setTimeout(()=> {
       $('.alert').slideUp(500);

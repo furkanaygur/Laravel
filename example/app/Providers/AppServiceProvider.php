@@ -33,6 +33,10 @@ class AppServiceProvider extends ServiceProvider
                 return [
                     'category' => Category::with('products.detail')->get(),
                     'product' => Products::with('detail')->get(),
+                    // 'index' => Category::with(["products.detail" => function ($q) {
+                    //     $q->where('product_detail.statu', '!=', 3);
+                    //     $q->where('product_detail.in_index', '=', 1);
+                    // }])->paginate(8),
                 ];
             });
             $view->with('setting', $setting);

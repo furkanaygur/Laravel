@@ -45,7 +45,7 @@
               <a class="aa-cart-link" href="{{ route('cart') }}">
                 <span class="fa fa-shopping-basket"></span>
                 <span class="aa-cart-title">SHOPPING CART</span>
-                <span class="aa-cart-notify">2</span>
+                <span class="aa-cart-notify">{{ Cart::count() }}</span>
               </a>
             </div>
             <!-- / cart box -->
@@ -120,7 +120,7 @@
             <button class="aa-browse-btn" type="submit">Login</button>
             <label for="rememberme" class="rememberme"><input type="checkbox" name="rememberme" id="rememberme"> Remember me </label>
             <div class="aa-register-now">
-              Don't have an account?<a href="{{ route('user.lr') }}">Register now!</a>
+              Don't have an account?<a href="{{ route('user.login.form') }}">Register now!</a>
             </div>
           </form>
         </div>                        
