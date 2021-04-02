@@ -63,7 +63,7 @@
                             <td>${{ $product->price }}</td>
                             <td>
                               <a href="javascript:void(0)" class="btn btn-xs btn-info minus" data-piece="{{ $product->qty - 1 }}" data-id="{{ $product->rowId }}"> - </a>
-                              <span class="aa-cart-quantity">{{ $product->qty }} </span>
+                              <span class="aa-cart-quantity"> {{ $product->qty }} </span>
                               <a href="javascript:void(0)" class="btn  btn-xs btn-info add" data-piece="{{ $product->qty + 1 }}" data-id="{{ $product->rowId }}">+</a>
                             </td>
                             <td>${{ $product->subtotal }}</td>
@@ -117,7 +117,4 @@
     </div>
   </section>
   <!-- / Cart view section -->
-
-
-
 @endsection

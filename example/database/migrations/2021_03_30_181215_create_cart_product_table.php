@@ -21,11 +21,13 @@ class CreateCartProductTable extends Migration
             $table->integer('piece');
             $table->decimal('price', 15, 4);
             $table->string('statu', 60);
+
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
 
             $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });
     }
 

@@ -47,27 +47,24 @@
               <div class="aa-product-inner">
               <!-- start prduct navigation -->
                 <ul class="nav nav-tabs aa-products-tab">
-                  @foreach ($setting['category'] as $category )
-                  <li class="{{ $loop->first ? 'active' : null }}"><a href="#{{ $category->name }}" data-toggle="tab">{{ $category->name }}</a></li>
-                  @endforeach
+                  <li class="active"><a href="#products" data-toggle="tab">Products</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                  @foreach ($setting['category'] as $category )
-                  <div class="tab-pane fade in {{ $loop->first ? 'active' : null }}" id="{{ $category->name }}">
+                  <div class="tab-pane fade in active" id="products">
                     <ul class="aa-product-catg">
                       <!-- start single product item -->
-                      @foreach ($category->products as $product )
+                      @foreach ($products as $product )
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="{{ route('category.product',[$category->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
                             <form action="{{ route('cart.add') }}" method="POST">
                               {{ csrf_field() }}
                               <input type="hidden" name="id" value="{{ $product->id }}">
                               <button style="width: 100%; border: 0px; outline: none;" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</button>
                             </form>
                               <figcaption>
-                              <h4 class="aa-product-title"><a href="{{ route('category.product',[$category->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
+                              <h4 class="aa-product-title"><a href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
                               <span class="aa-product-price">${{ $product->price }}</span>
                               @if (!is_null(isset($product->detail->old_price)))
                                 <span class="aa-product-price"><del>${{ $product->detail->old_price ?? null }}</del></span>
@@ -80,13 +77,13 @@
                       @endforeach          
                     </ul>
                   </div>
-                  @endforeach
-                </div>           
+                </div>       
               </div>
             </div>
           </div>
         </div>
       </div>
+      {{ $products->links('pagination-links') }}    
     </div>
   </section>
   <!-- / Products section -->

@@ -1851,16 +1851,17 @@ $.ajaxSetup({
 $('.minus, .add').on('click', function () {
   var id = $(this).attr('data-id');
   var piece = $(this).attr('data-piece');
+  var currentPiece = $('td .aa-cart-quantity').text();
   $.ajax({
     type: 'PATCH',
-    url: '/cart/update/' + id,
+    url: '/cart/update/'+id,
     data: {
-      piece: piece
+        piece : piece
     },
-    success: function success() {
-      window.location.href = '/cart';
+    success: function () {
+        window.location.href= '/cart';
     }
-  });
+  })
 });
 
 /***/ }),

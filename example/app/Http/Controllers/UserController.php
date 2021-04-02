@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Mail\UserActivationMail;
+use App\Models\CartProduct;
+use App\Models\Products;
+use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -31,6 +35,27 @@ class UserController extends Controller
 
         if (Auth::attempt($values, request()->has('rememberme'))) {
             request()->session()->regenerate();
+
+            $cart_id = ShoppingCart::firstOrCreate(['user_id' => auth()->id()])->id;
+            session()->put('cart_id', $cart_id);
+
+            if (Cart::count() > 0) {
+                foreach (Cart::content() as $cart_product) {
+                    CartProduct::updateOrCreate(
+                        ['cart_id' => $cart_id, 'product_id' => $cart_product->id],
+                        ['piece' => $cart_product->qty, 'price' => $cart_product->price, 'statu' => 'Waiting']
+                    );
+                }
+            }
+            Cart::destroy();
+            $cart_products = CartProduct::with('product')->where('cart_id', $cart_id)->get();
+
+            // fix 
+            foreach ($cart_products as $cart) {
+                $product = Products::with('categories')->where('id', $cart->product->id)->first();
+                Cart::add($cart->product->id, $cart->product->title, $cart->piece, $cart->price, ['slug' => $cart->product->slug, 'category' => $product->categories[0]->slug]);
+            }
+
             return redirect()->intended('/');
         } else {
             // $errors = ['email' => 'Could not login'];

@@ -19,7 +19,6 @@
                   <div class="tab-pane fade in active" id="cat1">
                     <ul class="aa-product-catg">
                       @foreach ($products as $product)
-                      @if ($product->detail->statu != 3)
                       <li>
                         <figure>
                           <a class="aa-product-img" href="{{ route('category.product',[$c->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
@@ -37,9 +36,8 @@
                           </figcaption>
                         </figure>                        
                         <!-- product badge -->
-                        <span class="aa-badge aa-{{ $product->detail->statu == 1 ? 'sale' : 'hot' }}">{{ $product->detail->statu == 1 ? 'SALE!' : 'HOT!' }}</span>
+                        <span class="aa-badge aa-{{ $product->detail->statu == 1 ? 'sale' : ($product->detail->statu == 2 ? 'hot' : 'sold-out') }}">{{ $product->detail->statu == 1 ? 'SALE!' : ($product->detail->statu == 2 ? 'HOT!' : 'SOLD OUT!') }}</span>
                       </li>
-                      @endif
                       @endforeach
                     </ul>
                   </div>
@@ -50,6 +48,7 @@
           </div>
         </div>
       </div>
+      {{ $products->links('pagination-links') }}
     </div>
   </section>
 <!-- / Products section -->

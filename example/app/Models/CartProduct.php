@@ -12,4 +12,9 @@ class CartProduct extends Model
 
     protected $table = 'cart_product';
     protected $guarded = [];
+
+    public function product()
+    {
+        return $this->belongsTo(Products::class);
+    }
 }

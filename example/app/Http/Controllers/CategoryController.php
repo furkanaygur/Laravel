@@ -9,7 +9,7 @@ class CategoryController extends Controller
     public function index($slug)
     {
         $c = Category::where('slug', $slug)->firstOrFail();
-        $products = $c->products()->get();
+        $products = $c->products()->paginate(16);
 
         return view('category', compact('c', 'products'));
     }
