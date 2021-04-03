@@ -100,7 +100,7 @@
                     </tr>
                   </tbody>
                 </table>
-                <a href="#" class="aa-cart-view-btn">Complete The Order </a>
+                <a href="{{ route('order.complate') }}" class="aa-cart-view-btn">Complete The Order </a>
               </div>
             </div>
           </div>

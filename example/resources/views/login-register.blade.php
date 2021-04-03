@@ -35,8 +35,10 @@
                 <h4>Register</h4>
                 <form action="{{ route('user.signin') }}" class="aa-login-form" method="POST">
                   {{ csrf_field() }}
-                  <label for="">Username<span>*</span></label>
-                  <input type="text" name="name" value="{{ old('name') }}" placeholder="Username">
+                  <label for="">Name<span>*</span></label>
+                  <input type="text" name="name" value="{{ old('name') }}" placeholder="Name">
+                  <label for="">Surname<span>*</span></label>
+                  <input type="text" name="surname" value="{{ old('surname') }}" placeholder="Surname">
                   <label for="">Email address<span>*</span></label>
                   <input type="text" name="email" value="{{ old('email') }}" placeholder="Email">
                   <label for="">Password<span>*</span></label>

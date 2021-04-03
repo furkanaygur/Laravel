@@ -9,6 +9,7 @@ use App\Models\ShoppingCart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+use App\Models\UserDetail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -36,7 +37,12 @@ class UserController extends Controller
         if (Auth::attempt($values, request()->has('rememberme'))) {
             request()->session()->regenerate();
 
-            $cart_id = ShoppingCart::firstOrCreate(['user_id' => auth()->id()])->id;
+            $cart_id = ShoppingCart::cart_id();
+            if (is_null($cart_id)) {
+                $cart = ShoppingCart::create(['user_id' => auth()->id()]);
+                $cart_id = $cart->id;
+            }
+
             session()->put('cart_id', $cart_id);
 
             if (Cart::count() > 0) {
@@ -70,17 +76,20 @@ class UserController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required | min:3 | max:60',
+            'surname' => 'required | min:3 | max:60',
             'email' => 'required | email',
             'password' => 'required'
         ]);
 
         $user = User::create([
             'name' => request('name'),
+            'surname' => request('surname'),
             'email' => request('email'),
             'password' => Hash::make(request('password')),
             'activation_key' => Str::random(60)
         ]);
 
+        $user->detail()->save(new UserDetail());
         Mail::to($user->email)->send(new UserActivationMail($user));
 
         Auth::login($user);
@@ -111,10 +120,5 @@ class UserController extends Controller
             return redirect()->route('user.index')->with('message', 'Email address could not be verified. Please try again.')
                 ->with('message_type', 'danger');
         }
-    }
-
-    public function activation2()
-    {
-        return 'sa';
     }
 }

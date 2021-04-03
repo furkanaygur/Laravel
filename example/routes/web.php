@@ -15,7 +15,6 @@ Route::prefix('user')->group(function () {
     Route::get('/activation/{key}', 'UserController@activation')->name('user.activation');
 });
 
-
 Route::prefix('cart')->group(function () {
     Route::get('/', 'ShoppingCartController@index')->name('cart');
     Route::post('/add', 'ShoppingCartController@add')->name('cart.add');
@@ -23,6 +22,13 @@ Route::prefix('cart')->group(function () {
     Route::delete('/delete/{rowId}', 'ShoppingCartController@delete')->name('cart.delete');
     Route::delete('/clear', 'ShoppingCartController@clear')->name('cart.clear');
 });
+
+Route::prefix('order')->group(function () {
+    Route::get('/', 'OrderController@index')->name('order');
+    Route::get('/payment', 'OrderController@complate')->name('order.complate');
+    Route::post('/payment', 'OrderController@payment')->name('order.payment');
+});
+
 
 Route::get('/{category_name}', 'CategoryController@index')->name('category');
 Route::get('/{category_name}/{product_name}', 'CategoryController@product')->name('category.product');

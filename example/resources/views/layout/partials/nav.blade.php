@@ -6,12 +6,15 @@
         <div class="col-md-12">
           <div class="aa-header-top-area">
             <div class="aa-header-top-right">
-              <ul class="aa-head-top-nav-right">
+              <ul style="display: flex" class="aa-head-top-nav-right">
                 @guest
                 <a style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn" href="" data-toggle="modal" data-target="#login-modal">Login</a>
                 @endguest
                 @auth
-                  <form action="{{ route('user.logout') }}" method="POST">
+                @if (count(Cart::content()) > 0)
+                    <a href="{{ route('order') }}" style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Orders</a> 
+                @endif
+                  <form style="margin-left:1.25rem;" action="{{ route('user.logout') }}" method="POST">
                     {{ csrf_field() }}
                     <button style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Logout</button>
                   </form>
