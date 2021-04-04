@@ -43,21 +43,21 @@
                     <div id="demo-1" class="simpleLens-gallery-container">
                       <div class="simpleLens-container">
                         <div class="simpleLens-big-image-container">
-                            <a data-lens-image="http://via.placeholder.com/900x1024?text=Furkan" class="simpleLens-lens-image">
-                                <img src="http://via.placeholder.com/250x300?text=Furkan" class="simpleLens-big-image">
+                            <a data-lens-image="/img/900x1024.png" class="simpleLens-lens-image">
+                                <img src="/img/250x300.png" class="simpleLens-big-image">
                             </a>
                         </div>
                       </div>
                       <div class="simpleLens-thumbnails-container">
-                          <a data-big-image="http://via.placeholder.com/250x300?text=Furkan1" 
-                            data-lens-image="http://via.placeholder.com/900x1024?text=Furkan" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="http://via.placeholder.com/50x50?text=Furkan">
+                          <a data-big-image="/img/250x300.png" 
+                            data-lens-image="/img/900x1024.png" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img src="/img/50x50.png">
                           </a>                                    
-                          <a data-big-image="http://via.placeholder.com/250x300?text=Furkan2" data-lens-image="http://via.placeholder.com/900x1024?text=Furkan" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="http://via.placeholder.com/50x50?text=Furkan">
+                          <a data-big-image="/img/250x300.png" data-lens-image="/img/900x1024.png" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img src="/img/50x50.png">
                           </a>
-                          <a data-big-image="http://via.placeholder.com/250x300?text=Furkan3" data-lens-image="http://via.placeholder.com/900x1024?text=Furkan" class="simpleLens-thumbnail-wrapper" href="#">
-                            <img src="http://via.placeholder.com/50x50?text=Furkan">
+                          <a data-big-image="/img/250x300.png" data-lens-image="/img/900x1024.png" class="simpleLens-thumbnail-wrapper" href="#">
+                            <img src="/img/50x50.png">
                           </a>
                       </div>
                     </div>

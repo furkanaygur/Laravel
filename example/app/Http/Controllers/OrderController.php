@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\ShoppingCart;
 use App\Models\User;
 use App\Models\UserDetail;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -12,7 +13,9 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $orders = Order::orderByDesc('id')->get();
+        $orders = Order::with('cart')->whereHas('cart', function ($q) {
+            $q->where('user_id', auth()->id());
+        })->orderByDesc('id')->get();
 
         return view('orders', compact('orders'));
     }
@@ -34,7 +37,6 @@ class OrderController extends Controller
 
     public function payment()
     {
-
         $this->validate(request(), [
             'name' => 'required | min:3 | max:60',
             'surname' => 'required | min:3 | max:60',
@@ -59,6 +61,7 @@ class OrderController extends Controller
 
         $infos['price'] = Cart::subtotal();
         $infos['cart_id'] = session('cart_id');
+        $infos['user_id'] = auth()->id();
         $infos['statu'] = 'Your order is preparing';
 
         Order::create($infos);
@@ -66,5 +69,15 @@ class OrderController extends Controller
         session()->forget('cart_id');
 
         return redirect()->route('order');
+    }
+
+    public function detail($id)
+    {
+        $order = Order::with(['cart.cart_products.product.categories', 'cart.cart_products.product.detail'])->where('order.id', $id)
+            ->whereHas('cart', function ($q) {
+                $q->where('user_id', auth()->id());
+            })
+            ->firstOrFail();
+        return view('order-detail', compact('order'));
     }
 }

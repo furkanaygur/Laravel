@@ -10,10 +10,8 @@
                 @guest
                 <a style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn" href="" data-toggle="modal" data-target="#login-modal">Login</a>
                 @endguest
-                @auth
-                @if (count(Cart::content()) > 0)
-                    <a href="{{ route('order') }}" style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Orders</a> 
-                @endif
+                @auth              
+                  <a href="{{ route('order') }}" style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Orders</a> 
                   <form style="margin-left:1.25rem;" action="{{ route('user.logout') }}" method="POST">
                     {{ csrf_field() }}
                     <button style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn">Logout</button>

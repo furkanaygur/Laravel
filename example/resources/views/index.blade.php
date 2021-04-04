@@ -15,7 +15,7 @@
               <!-- single slide item -->
               <li>
                 <div class="seq-model">
-                  <img data-seq src="http://via.placeholder.com/1920x800?text=Furkan" />
+                  <img data-seq src="/img/1920x800.png" />
                 </div>
                 <div class="seq-title">
                 <span data-seq>Save Up to 75% Off</span>                
@@ -57,7 +57,7 @@
                       @foreach ($products as $product )
                         <li>
                           <figure>
-                            <a class="aa-product-img" href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
+                            <a class="aa-product-img" href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}"><img src="/img/250x300.png" alt=""></a>
                             <form action="{{ route('cart.add') }}" method="POST">
                               {{ csrf_field() }}
                               <input type="hidden" name="id" value="{{ $product->id }}">
@@ -94,7 +94,7 @@
         <div class="col-md-12">        
           <div class="row">
             <div class="aa-banner-area">
-            <a href="#"><img src="http://via.placeholder.com/1170x170?text=Furkan" alt="fashion banner img"></a>
+            <a href="#"><img src="/img/1170x170.png" alt="fashion banner img"></a>
           </div>
           </div>
         </div>
@@ -147,11 +147,11 @@
               <!-- single slide -->
               <li>
                 <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="http://via.placeholder.com/150x150?text=Furkan" alt="testimonial img">
+                <img class="aa-testimonial-img" src="/img/150x150.png" alt="testimonial img">
                   <span class="fa fa-quote-left aa-testimonial-quote"></span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
                   <div class="aa-testimonial-info">
-                    <p>Allison</p>
+                    <p>FURKAN</p>
                     <span>Designer</span>
                     <a href="#">Dribble.com</a>
                   </div>
@@ -160,26 +160,13 @@
               <!-- single slide -->
               <li>
                 <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="http://via.placeholder.com/150x150?text=Furkan" alt="testimonial img">
+                <img class="aa-testimonial-img" src="/img/150x150.png" alt="testimonial img">
                   <span class="fa fa-quote-left aa-testimonial-quote"></span>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
                   <div class="aa-testimonial-info">
-                    <p>KEVIN MEYER</p>
+                    <p>FURKAN</p>
                     <span>CEO</span>
                     <a href="#">Alphabet</a>
-                  </div>
-                </div>
-              </li>
-               <!-- single slide -->
-              <li>
-                <div class="aa-testimonial-single">
-                <img class="aa-testimonial-img" src="http://via.placeholder.com/150x150?text=Furkan" alt="testimonial img">
-                  <span class="fa fa-quote-left aa-testimonial-quote"></span>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui!consectetur adipisicing elit. Sunt distinctio omnis possimus, facere, quidem qui.</p>
-                  <div class="aa-testimonial-info">
-                    <p>Luner</p>
-                    <span>COO</span>
-                    <a href="#">Kinatic Solution</a>
                   </div>
                 </div>
               </li>

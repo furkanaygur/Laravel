@@ -4,8 +4,18 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'IndexController@index')->name('user.index');
+Route::prefix('admin')->namespace('admin')->group(function () {
+    Route::redirect('/', '/admin/login');
+    Route::match(['get', 'post'], '/login', 'UserController@login')->name('admin.login');
+    Route::match(['get', 'post'], '/logout', 'UserController@logout')->name('admin.logout');
 
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/index', 'IndexController@index')->name('admin.index');
+    });
+});
+
+Route::get('/', 'IndexController@index')->name('user.index');
+Route::redirect('/index', '/');
 Route::get('/login', 'UserController@index')->name('user.login.form');
 
 Route::prefix('user')->group(function () {
@@ -25,10 +35,10 @@ Route::prefix('cart')->group(function () {
 
 Route::prefix('order')->group(function () {
     Route::get('/', 'OrderController@index')->name('order');
+    Route::get('/{order_id}', 'OrderController@detail')->name('order.detail');
     Route::get('/payment', 'OrderController@complate')->name('order.complate');
     Route::post('/payment', 'OrderController@payment')->name('order.payment');
 });
-
 
 Route::get('/{category_name}', 'CategoryController@index')->name('category');
 Route::get('/{category_name}/{product_name}', 'CategoryController@product')->name('category.product');

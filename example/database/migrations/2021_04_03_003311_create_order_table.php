@@ -17,6 +17,7 @@ class CreateOrderTable extends Migration
         Schema::create('order', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('cart_id')->unsigned()->unique();
+            $table->integer('user_id');
             $table->string('name', 60);
             $table->string('surname', 60);
             $table->string('phone', 20);

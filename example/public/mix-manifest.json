@@ -18,5 +18,12 @@
     "/js/assets/nouislider.js": "/js/assets/nouislider.js",
     "/js/assets/sequence-theme.modern-slide-in.js": "/js/assets/sequence-theme.modern-slide-in.js",
     "/js/assets/sequence.js": "/js/assets/sequence.js",
-    "/js/assets/slick.js": "/js/assets/slick.js"
+    "/js/assets/slick.js": "/js/assets/slick.js",
+    "/css/admin/adminlte.min.css": "/css/admin/adminlte.min.css",
+    "/css/admin/OverlayScrollbars.min.css": "/css/admin/OverlayScrollbars.min.css",
+    "/js/admin/adminlte.js": "/js/admin/adminlte.js",
+    "/js/admin/adminlte.js.map": "/js/admin/adminlte.js.map",
+    "/js/admin/adminlte.min.js": "/js/admin/adminlte.min.js",
+    "/js/admin/adminlte.min.js.map": "/js/admin/adminlte.min.js.map",
+    "/js/admin/demo.js": "/js/admin/demo.js"
 }

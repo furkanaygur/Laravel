@@ -11,8 +11,8 @@
 @section('content')
 @include('layout.partials.alert')
  <!-- catg header banner section -->
- <section id="aa-catg-head-banner">
-    <img src="http://via.placeholder.com/1920x300?text=Furkan" alt="fashion img">
+<section id="aa-catg-head-banner">
+    <img src="/img/1920x300.png" alt="">
     <div class="aa-catg-head-banner-area">
         <div class="container">
         <div class="aa-catg-head-banner-content">
@@ -105,7 +105,7 @@
             </div>
           </div>
           @else
-            <div class="container">
+            <div style="margin: 2rem 0" class="container">
               <div style="height:150px; display: flex; flex-direction:column; justify-content: center; align-items:center; background-color: #37c6f5; color: white;" class="w3-panel">
                 <h3>Shopping cart is empty</h3>
                 <a class="aa-secondary-btn" href="{{ route('user.index') }}">Start Shopping</a>

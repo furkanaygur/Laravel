@@ -18,6 +18,11 @@ class ShoppingCart extends Model
         return $this->hasOne(Order::class);
     }
 
+    public function cart_products()
+    {
+        return $this->hasMany(CartProduct::class, 'cart_id');
+    }
+
     public static function cart_id()
     {
         $cart_id = DB::table('cart as c')
@@ -27,5 +32,10 @@ class ShoppingCart extends Model
             ->orderByDesc('c.created_at')
             ->select('c.id')
             ->first();
+    }
+
+    public function product_piece()
+    {
+        return DB::table('cart_product')->where('cart_id', $this->id)->sum('piece');
     }
 }

@@ -1847,21 +1847,20 @@ $.ajaxSetup({
     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   }
 });
-
-$('.minus, .add').on('click', function () {
+$('.minus, .add').on('click', function (e) {
+  e.preventDefault();
   var id = $(this).attr('data-id');
   var piece = $(this).attr('data-piece');
-  var currentPiece = $('td .aa-cart-quantity').text();
   $.ajax({
     type: 'PATCH',
-    url: '/cart/update/'+id,
+    url: '/cart/update/' + id,
     data: {
-        piece : piece
+      piece: piece
     },
-    success: function () {
-        window.location.href= '/cart';
+    success: function success() {
+      window.location.href = '/cart';
     }
-  })
+  });
 });
 
 /***/ }),
