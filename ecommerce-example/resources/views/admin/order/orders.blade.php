@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Admin | Users')
+@section('title', 'Admin | Categories')
 @section('head')
 <link rel="stylesheet" href="{{ mix('css/admin/buttons.bootstrap4.min.css') }}">
 <link rel="stylesheet" href="{{ mix('css/admin/responsive.bootstrap4.min.css') }}">
@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Users</h1>
+            <h1>Categories</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -23,47 +23,49 @@
         <div class="row">
           <div class="col-12">
             <div class="card">
-              <!-- /.card-header -->
               <div class="card-body">
                 <table id="info-table" class="table table-bordered table-hover">
                   <thead>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Lastname</th>
+                        <th>Full Name</th>
+                        <th>Phone</th>
                         <th>Email</th>
-                        <th>Type</th>
-                        <th>Register Date</th>
+                        <th>Price</th>
+                        <th>Address</th>
+                        <th>Statu</th>
+                        <th>Created Date</th>
                         <th></th>
                     </tr>
                   </thead>
                   <tbody>
-                    @foreach ($users as $user)
+                    @foreach ($orders as $order)
                         <tr>
-                            <td><img style="border-radius: 50%;" src="/img/50x50.png" ></td>
-                            <td>{{ $user->name }}</td>
-                            <td>{{$user->surname}}</td>
-                            <td>{{ $user->email }}</td>
-                            <td> <span class="badge badge-{{ $user->isAdmin == 1 ? 'success' : 'warning'  }}">{{ $user->isAdmin == 1 ? 'Admin' : 'User' }}</span> </td>
-                            <td>{{ $user->created_at .' ('.timeConvert($user->created_at).')' }}</td>
-                            <td>
-                              <div style="display: flex; justify-content: center; align-items: center">
-                                <a style="margin-right: .5rem; margin-bottom: .5rem" href="{{ route('admin.user-update', $user->id) }}" class="btn btn-info btn-sm">View</a>
-                                <a style="margin-bottom: .5rem" href="#" class="btn btn-danger btn-sm">Delete</a>
-                              </div>
-                            </td>
+                          <td>{{ $order->name . ' '. $order->surname }}</td>
+                          <td>{{$order->phone}}</td>
+                          <td>{{$order->email}}</td>
+                          <td>{{$order->price}}</td>
+                          <td>{{$order->address}}</td>
+                          <td>{{$order->statu}}</td>
+                          <td>{{ $order->created_at .' ('.timeConvert($order->created_at).')' }}</td>
+                          <td style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
+                            <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center">
+                              <a style="margin-bottom: .5rem" href="{{ route('admin.product-update', $order->id) }}" class="btn btn-info btn-sm">View</a>
+                              <a style="margin-bottom: .5rem" href="#" class="btn btn-danger btn-sm">Delete</a>
+                            </div>
+                          </td>
                         </tr>
                     @endforeach
                   </tbody>
                   <tfoot>
                     <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                        <th>Type</th>
-                        <th>Register Date</th>
-                        <th></th>
+                      <th>Full Name</th>
+                      <th>Phone</th>
+                      <th>Email</th>
+                      <th>Price</th>
+                      <th>Address</th>
+                      <th>Statu</th>
+                      <th>Created Date</th>
+                      <th></th>
                     </tr>
                     </tr>
                   </tfoot>

@@ -14,7 +14,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-header">Pages</li>
           <li class="nav-item">
-            <a href="{{ route('admin.users') }}" class="nav-link">
+            <a href="{{ route('admin.users') }}" class="nav-link {{ (request()->is('admin/users')) ||request()->is('admin/user/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-users"></i>
               <p>
                 Users
@@ -22,7 +22,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.products') }}" class="nav-link {{ (request()->is('admin/products')) ||request()->is('admin/product/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-box-open"></i>
               <p>
                 Products
@@ -30,7 +30,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.categories') }}" class="nav-link {{ (request()->is('admin/categories')) ||request()->is('admin/category/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Categories
@@ -38,7 +38,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.orders') }}" class="nav-link {{ (request()->is('admin/orders')) ||request()->is('admin/order/*') ? 'active' : '' }}">
               <i class="nav-icon fas fa-cart-arrow-down"></i>
               <p>
                 Orders

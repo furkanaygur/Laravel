@@ -35,14 +35,42 @@
                 <h4>Register</h4>
                 <form action="{{ route('user.signin') }}" class="aa-login-form" method="POST">
                   {{ csrf_field() }}
-                  <label for="">Name<span>*</span></label>
-                  <input type="text" name="name" value="{{ old('name') }}" placeholder="Name">
-                  <label for="">Surname<span>*</span></label>
-                  <input type="text" name="surname" value="{{ old('surname') }}" placeholder="Surname">
-                  <label for="">Email address<span>*</span></label>
-                  <input type="text" name="email" value="{{ old('email') }}" placeholder="Email">
-                  <label for="">Password<span>*</span></label>
-                  <input type="password" name="password" placeholder="Password">
+                  <div class="form-group {{ $errors->has('name') ? 'has-error' : null }}">
+                    <label for="">Name<span>*</span></label>
+                    <input type="text" name="name" value="{{ old('name') }}" placeholder="Name">
+                    @if ($errors->has('name'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('name') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <div class="form-group {{ $errors->has('surname') ? 'has-error' : null }}">
+                    <label for="">Lastname<span>*</span></label>
+                    <input type="text" name="surname" value="{{ old('surname') }}" placeholder="Surname">
+                    @if ($errors->has('surname'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('surname') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <div class="form-group {{ $errors->has('email') ? 'has-error' : null }}">
+                    <label for="">Email address<span>*</span></label>
+                    <input type="text" name="email" value="{{ old('email') }}" placeholder="Email">
+                    @if ($errors->has('email'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('email') }}</strong>
+                      </span>
+                    @endif
+                  </div>
+                  <div class="form-group {{ $errors->has('password') ? 'has-error' : null }}">
+                    <label for="">Password<span>*</span></label>
+                    <input type="password" name="password" placeholder="Password">
+                    @if ($errors->has('password'))
+                      <span class="help-block">
+                          <strong>{{ $errors->first('password') }}</strong>
+                      </span>
+                    @endif
+                  </div>
                   <button type="submit" class="aa-browse-btn">Register</button>                    
                 </form>
               </div>

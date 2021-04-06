@@ -8,6 +8,7 @@
             <div class="aa-header-top-right">
               <ul style="display: flex" class="aa-head-top-nav-right">
                 @guest
+                <a style="border: 1px solid #37c6f5; margin:5px 10px 5px 0; font-size:14px;" class="aa-secondary-btn" href="{{ route('user.login.form') }}">Register now!</a>
                 <a style="border: 1px solid #37c6f5; margin:5px 0; font-size:14px;" class="aa-secondary-btn" href="" data-toggle="modal" data-target="#login-modal">Login</a>
                 @endguest
                 @auth              

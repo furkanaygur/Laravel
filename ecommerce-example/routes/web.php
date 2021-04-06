@@ -26,18 +26,20 @@ Route::prefix('admin')->namespace('admin')->group(function () {
             Route::match(['get', 'post'], '/{user_id}', 'UserController@update')->name('admin.user-update');
         });
 
-        // Route::get('/orders', 'OrderController@index')->name('admin.orders');
-        // Route::prefix('order')->group(function () {
-        //     Route::get('/{order_id}', 'OrderController@index')->name('admin.order-update');
-        // });
-        // Route::get('/products', 'ProductController@index')->name('admin.products');
-        // Route::prefix('product')->group(function () {
-        //     Route::get('/{product_id}', 'ProductController@index')->name('admin.product-update');
-        // });
-        // Route::get('/categories', 'CategoryController@index')->name('admin.categories');
-        // Route::prefix('category')->group(function () {
-        //     Route::get('/{categorry_id}', 'CategoryController@index')->name('admin.category-update');
-        // });
+        Route::get('/products', 'ProductController@index')->name('admin.products');
+        Route::prefix('product')->group(function () {
+            Route::match(['get', 'post'], '/{product_id?}', 'ProductController@update')->name('admin.product-update');
+        });
+
+        Route::get('/orders', 'OrderController@index')->name('admin.orders');
+        Route::prefix('order')->group(function () {
+            Route::get('/{order_id}', 'OrderController@update')->name('admin.order-update');
+        });
+
+        Route::get('/categories', 'CategoryController@index')->name('admin.categories');
+        Route::prefix('category')->group(function () {
+            Route::get('/{categorry_id}', 'CategoryController@update')->name('admin.category-update');
+        });
     });
 });
 
