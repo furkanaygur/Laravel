@@ -12,7 +12,7 @@
         <div class="row mb-2">
           <div style="display: flex; justify-content: flex-start; align-items: center" class="col-sm-4">
             <h1 style="margin-right: .5rem">Products</h1>
-            <a href="#" class="btn btn-warning text-white"> Add New</a>
+            <a href="{{ route('admin.add-product') }}" class="btn btn-warning text-white"> Add New</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->

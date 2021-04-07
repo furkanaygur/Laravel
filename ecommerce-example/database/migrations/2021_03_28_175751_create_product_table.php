@@ -18,7 +18,7 @@ class CreateProductTable extends Migration
             $table->increments('id');
             $table->string('title', 255);
             $table->string('slug', 255);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->decimal('price', 15, 4);
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));

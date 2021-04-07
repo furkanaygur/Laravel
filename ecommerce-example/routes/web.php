@@ -18,7 +18,7 @@ Route::prefix('admin')->namespace('admin')->group(function () {
     Route::match(['get', 'post'], '/logout', 'LoginController@logout')->name('admin.logout');
 
     Route::middleware(['admin'])->group(function () {
-        Route::redirect('/index', '/admin/',);
+        Route::redirect('/index', '/admin/');
         Route::get('/', 'IndexController@index')->name('admin.index');
 
         Route::get('/users', 'UserController@index')->name('admin.users');
@@ -27,18 +27,20 @@ Route::prefix('admin')->namespace('admin')->group(function () {
         });
 
         Route::get('/products', 'ProductController@index')->name('admin.products');
+        Route::redirect('/product', '/admin/products');
         Route::prefix('product')->group(function () {
+            Route::match(['get', 'post'], '/add', 'ProductController@add_product')->name('admin.add-product');
             Route::match(['get', 'post'], '/{product_id?}', 'ProductController@update')->name('admin.product-update');
         });
 
         Route::get('/orders', 'OrderController@index')->name('admin.orders');
         Route::prefix('order')->group(function () {
-            Route::get('/{order_id}', 'OrderController@update')->name('admin.order-update');
+            Route::match(['get', 'post'], '/{order_id}', 'OrderController@update')->name('admin.order-update');
         });
 
         Route::get('/categories', 'CategoryController@index')->name('admin.categories');
         Route::prefix('category')->group(function () {
-            Route::get('/{categorry_id}', 'CategoryController@update')->name('admin.category-update');
+            Route::match(['get', 'post'], '/{categorry_id}', 'CategoryController@update')->name('admin.category-update');
         });
     });
 });

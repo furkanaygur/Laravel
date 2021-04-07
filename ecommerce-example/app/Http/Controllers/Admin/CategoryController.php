@@ -14,7 +14,7 @@ class CategoryController extends Controller
         return view('admin.category.categories', compact('categories'));
     }
 
-    public function updatte($id)
+    public function update($id)
     {
         return $id;
     }

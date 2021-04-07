@@ -49,7 +49,7 @@
                           <td>{{ $order->created_at .' ('.timeConvert($order->created_at).')' }}</td>
                           <td style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
                             <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center">
-                              <a style="margin-bottom: .5rem" href="{{ route('admin.product-update', $order->id) }}" class="btn btn-info btn-sm">View</a>
+                              <a style="margin-bottom: .5rem" href="{{ route('admin.order-update', $order->id) }}" class="btn btn-info btn-sm">View</a>
                               <a style="margin-bottom: .5rem" href="#" class="btn btn-danger btn-sm">Delete</a>
                             </div>
                           </td>

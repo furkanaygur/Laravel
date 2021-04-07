@@ -1,5 +1,5 @@
 @extends('admin.layout.master')
-@section('title', 'Admin | Edit Product')
+@section('title', 'Admin | Add New Product')
 @section('head')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css" integrity="sha512-8vq2g5nHE062j3xor4XxPeZiPjmRDh6wlufQlfC6pdQ/9urJkU07NM0tEREeymP++NczacJ/Q59ul+/K2eYvcg==" crossorigin="anonymous" />
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Edit Product</h1>
+            <h1>Add New Product</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -23,8 +23,7 @@
           <!-- SELECT2 EXAMPLE -->
           <div class="card card-default">
             <div class="card-header">
-              <h3 class="card-title"><span class="text-warning">{{'#'.$product->id .' '.$product->title }}</span></h3>
-              <a href="{{ route('category.product', [$product->categories[0]->slug, $product->slug]) }}" target="_blank" class="btn btn-info btn-xs ml-2">Go to Product</a>
+              <h3 class="card-title"><span class="text-warning">New Product</span></h3>
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
                   <i class="fas fa-minus"></i>
@@ -36,13 +35,13 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="{{ route('admin.product-update', $product->id) }}" method="POST">
+                <form action="{{ route('admin.add-product') }}" method="POST">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
                         <div class="form-group {{ $errors->has('title') ? 'has-error' : null }}">
                             <label>title*</label>
-                            <input type="text" class="form-control" name="title" value="{{ old('title', $product->title) }}" placeholder="Title*">
+                            <input type="text" class="form-control" name="title" value="{{ old('title') }}" placeholder="Title*">
                             @if ($errors->has('title'))
                                 <span class="help-block">
                                     <strong class="text-danger">{{ $errors->first('title') }}</strong>
@@ -56,7 +55,7 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                 </div>
-                                <input type="text" name="price" class="form-control" value="{{ old('price', $product->price) }}" placeholder="Price*">
+                                <input type="text" name="price" class="form-control" value="{{ old('price') }}" placeholder="Price*">
                             </div>
                             @if ($errors->has('price'))
                                 <span class="help-block">
@@ -69,7 +68,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Slug*</label>
-                                <input type="text" class="form-control" name="slug" value="{{ old('slug', $product->slug) }}" placeholder="Slug*"> 
+                                <input type="text" class="form-control" name="slug" value="{{ old('slug') }}" placeholder="Slug*"> 
                             </div>
                             <div class="form-group">
                                 <label for="">Old Price*</label>
@@ -77,46 +76,57 @@
                                     <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-dollar-sign"></i></span>
                                     </div>
-                                    <input type="text" name="old_price" class="form-control" value="{{ old('old_price', $product->detail->old_price) }}" placeholder="Price*">
+                                    <input type="text" name="old_price" class="form-control" value="{{ old('old_price') }}" placeholder="Price*">
                                 </div>
                             </div>
+                            
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Category</label>
                                 <select name="category" class="form-control select2">
+                                    <option value=""> -- Choose a Category -- </option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id }}" {{ $category->id == $product->categories[0]->id ? 'selected="selected"' : null }}> {{ $category->name }}</option>
+                                        <option value="{{ $category->id }}" {{ $category->id == old('category') ? 'selected="selected"' : null }}> {{ $category->name }}</option>
                                     @endforeach
                                 </select>
+                                @if ($errors->has('category'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('category') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Statu</label>
                                 <select name="statu" class="form-control select2">
-                                    <option class="text-green" value="1" {{ $product->detail->statu == 1 ? 'selected="selected"' : null }}> SALE! </option>
-                                    <option class="text-orange" value="2" {{ $product->detail->statu == 2 ? 'selected="selected"' : null }}> HOT! </option>
-                                    <option class="text-danger" value="3" {{ $product->detail->statu == 3 ? 'selected="selected"' : null }}> SOLD OUT! </option>
+                                    <option value=""> -- Choose a Category -- </option>
+                                    <option class="text-green" value="1" {{ old('statu') == 1 ? 'selected="selected"' : null }}> SALE! </option>
+                                    <option class="text-orange" value="2" {{ old('statu') == 2 ? 'selected="selected"' : null }}> HOT! </option>
+                                    <option class="text-danger" value="3" {{ old('statu') == 3 ? 'selected="selected"' : null }}> SOLD OUT! </option>
                                 </select>
+                                @if ($errors->has('statu'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('statu') }}</strong>
+                                    </span>
+                                @endif
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label>Description*</label>
-                                <textarea id="summernote" class="form-control" name="description" placeholder="Description*">{{ old('description', $product->description) }}</textarea>
-                               
+                                <textarea id="summernote" class="form-control" name="description" placeholder="Description*">{{ old('description') }}</textarea>
                             </div>
                         </div>
                         <div class="col-md-12">
                             <div class="form-group mb-0">
                                 <div class="icheck-success d-inline mr-4">
-                                    <input type="checkbox" name="in_index"  id="checkboxDanger1" {{ $product->detail->in_index == 1 ? 'checked' : null }}>
+                                    <input type="checkbox" name="in_index"  id="checkboxDanger1" {{ old('in_index') == 1 ? 'checked' : null }}>
                                     <label for="checkboxDanger1"> In Index </label>
                                 </div>
                                 <div class="d-inline float-right">
-                                    <button class="btn btn-sm btn-info mr-2">Update</button>
-                                    <a href="#" class="btn btn-sm btn-danger">Delete</a>
+                                    <button class="btn btn-sm btn-success mr-2">Save</button>
                                 </div>
                             </div>
                         </div>

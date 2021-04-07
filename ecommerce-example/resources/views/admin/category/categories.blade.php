@@ -43,7 +43,7 @@
                             <td>{{ $category->created_at .' ('.timeConvert($category->created_at).')' }}</td>
                             <td>
                               <div style="display: flex; justify-content: center; align-items: center">
-                                <a style="margin-right: .5rem; margin-bottom: .5rem" href="{{ route('admin.product-update', $category->id) }}" class="btn btn-info btn-sm">View</a>
+                                <a style="margin-right: .5rem; margin-bottom: .5rem" href="{{ route('admin.category-update', $category->id) }}" class="btn btn-info btn-sm">View</a>
                                 <a style="margin-bottom: .5rem" href="#" class="btn btn-danger btn-sm">Delete</a>
                               </div>
                             </td>
