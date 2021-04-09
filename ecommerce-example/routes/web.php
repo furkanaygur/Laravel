@@ -40,6 +40,7 @@ Route::prefix('admin')->namespace('admin')->group(function () {
 
         Route::get('/categories', 'CategoryController@index')->name('admin.categories');
         Route::prefix('category')->group(function () {
+            Route::match(['get', 'post'], '/add', 'CategoryController@add_category')->name('admin.add-category');
             Route::match(['get', 'post'], '/{categorry_id}', 'CategoryController@update')->name('admin.category-update');
         });
     });

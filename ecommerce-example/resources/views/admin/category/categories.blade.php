@@ -10,8 +10,9 @@
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Categories</h1>
+          <div style="display: flex; justify-content: flex-start; align-items: center" class="col-sm-4">
+            <h1 style="margin-right: .5rem">Categories</h1>
+            <a href="{{ route('admin.add-category') }}" class="btn btn-warning text-white"> Add New</a>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -19,6 +20,7 @@
 
     <!-- Main content -->
     <section class="content">
+      @include('admin.layout.partials.alert')
       <div class="container-fluid">
         <div class="row">
           <div class="col-12">
@@ -39,7 +41,7 @@
                         <tr>
                             <td>{{ $category->name }}</td>
                             <td>{{$category->slug}}</td>
-                            <td>{{$category->parent_id ?? '-'}}</td>
+                            <td>{{$category->parent_category($category->parent_id) }}</td>
                             <td>{{ $category->created_at .' ('.timeConvert($category->created_at).')' }}</td>
                             <td>
                               <div style="display: flex; justify-content: center; align-items: center">

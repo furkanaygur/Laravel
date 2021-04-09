@@ -17,4 +17,14 @@ class Category extends Model
     {
         return $this->belongsToMany(Products::class, 'category_product', 'category_id', 'product_id');
     }
+
+    public function parent_category($id)
+    {
+        $parent = Category::where('id', $id)->first();
+
+        if (!is_null($parent)) {
+            return $parent->name;
+        }
+        return '-';
+    }
 }
