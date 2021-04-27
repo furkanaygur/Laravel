@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\View;
 use App\Models\Products;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
+use Debugbar;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        \Debugbar::disable();
+
         View::composer(['*'], function ($view) {
             $end_time = now()->addDay(1);
             $setting = Cache::remember('category', $end_time, function () {

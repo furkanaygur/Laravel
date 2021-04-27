@@ -24,11 +24,11 @@ class CreateOrderTable extends Migration
             $table->string('email', 60);
             $table->string('address', 150);
             $table->decimal('price', 15, 4);
-            $table->sting('bank', 60);
+            $table->string('bank', 60);
             $table->string('statu', 60)->nullable();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
 
             $table->foreign('cart_id')->references('id')->on('cart')->onDelete('cascade');

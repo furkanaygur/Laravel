@@ -19,7 +19,7 @@ class CreateCartTable extends Migration
             $table->integer('user_id')->unsigned();
 
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on UPDATE CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
             $table->timestamp('deleted_at')->nullable();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
