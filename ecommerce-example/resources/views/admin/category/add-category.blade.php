@@ -48,17 +48,15 @@
                             @endif
                         </div>
                         <!-- /.form-group -->
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Parent Category</label>
-                                <select name="parent_id" class="form-control select2">
-                                    <option value="{{ null }}"> -- Choose Parent Category -- </option>
-                                    @foreach ($categories as $c)
-                                        <option value="{{ $c->id }}"> {{ $c->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                          <div class="form-group">
+                              <label>Parent Category</label>
+                              <select name="parent_id" class="form-control select2">
+                                  <option value="{{ null }}"> -- Choose Parent Category -- </option>
+                                  @foreach ($categories as $c)
+                                      <option value="{{ $c->id }}"> {{ $c->name }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">

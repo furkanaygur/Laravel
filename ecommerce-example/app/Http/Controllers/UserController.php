@@ -56,7 +56,6 @@ class UserController extends Controller
             Cart::destroy();
             $cart_products = CartProduct::with('product')->where('cart_id', $cart_id)->get();
 
-            // fix 
             foreach ($cart_products as $cart) {
                 $product = Products::with('categories')->where('id', $cart->product->id)->first();
                 Cart::add($cart->product->id, $cart->product->title, $cart->piece, $cart->price, ['slug' => $cart->product->slug, 'category' => $product->categories[0]->slug]);
@@ -64,8 +63,6 @@ class UserController extends Controller
 
             return redirect()->intended('/');
         } else {
-            // $errors = ['email' => 'Could not login'];
-            // return back()->withErrors($errors);
             return redirect()->route('user.login.form')
                 ->with('message', 'Could not login. Please try again')
                 ->with('message_type', 'danger')->withInput();

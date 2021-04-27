@@ -32,10 +32,12 @@ class ShoppingCart extends Model
             ->orderByDesc('c.created_at')
             ->select('c.id')
             ->first();
+
+        if (!is_null($cart_id)) return $cart_id->id;
     }
 
     public function product_piece()
     {
-        return DB::table('cart_product')->where('cart_id', $this->id)->sum('piece');
+        return DB::table('cart_product')->where('cart_id', $this->id)->whereRaw('deleted_at is null')->sum('piece');
     }
 }

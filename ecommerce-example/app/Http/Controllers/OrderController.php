@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\UserDetail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -17,7 +18,7 @@ class OrderController extends Controller
             $q->where('user_id', auth()->id());
         })->orderByDesc('id')->get();
 
-        return view('orders', compact('orders'));
+        return view('orders')->with('orders', $orders);
     }
 
     public function complate()
@@ -42,6 +43,10 @@ class OrderController extends Controller
             'surname' => 'required | min:3 | max:60',
             'email' => 'required | email',
             'bank' => 'required',
+            'card_number' => 'required',
+            'cvv' => 'required',
+            'year' => 'required',
+            'month' => 'required',
             'phone' => 'required',
             'address' => 'required',
         ]);
@@ -61,7 +66,6 @@ class OrderController extends Controller
 
         $infos['price'] = Cart::subtotal();
         $infos['cart_id'] = session('cart_id');
-        $infos['user_id'] = auth()->id();
         $infos['statu'] = 'Your order is preparing';
 
         Order::create($infos);

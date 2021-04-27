@@ -47,7 +47,7 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div style="color: #fff !important;" class="small-box bg-warning">
               <div class="inner">
                 <h3>{{ count($setting['product']) }}</h3>
                 <p>Total Products</p>
@@ -55,7 +55,7 @@
               <div class="icon">
                 <i class="fas fa-box-open"></i>
               </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" style="color: #fff !important;" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

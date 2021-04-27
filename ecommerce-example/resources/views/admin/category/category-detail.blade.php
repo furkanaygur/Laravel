@@ -40,33 +40,41 @@
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('name') ? 'has-error' : null }}">
-                            <label>Name*</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name', $category->name) }}" placeholder="Name*">
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group">
-                            <div class="form-group">
-                                <label>Parent Category</label>
-                                <select name="parent_id" class="form-control select2">
-                                    <option> -- Choose Parent Category -- </option>
-                                    @foreach ($categories as $c)
-                                        <option value="{{ $c->id }}" {{ $category->parent_id == $c->id ? 'selected="selected"' : null }}> {{ $c->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                          <div class="form-group {{ $errors->has('name') ? 'has-error' : null }}">
+                              <label>Name*</label>
+                              <input type="text" class="form-control" name="name" value="{{ old('name', $category->name) }}" placeholder="Name*">
+                              @if ($errors->has('name'))
+                                  <span class="help-block">
+                                      <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                                  </span>
+                              @endif
+                          </div>
+                          <!-- /.form-group -->
+                          <div class="form-group">
+                              <label>Parent Category</label>
+                              <select name="parent_id" class="form-control select2">
+                                  <option> -- Choose Parent Category -- </option>
+                                  @foreach ($categories as $c)
+                                      <option value="{{ $c->id }}" {{ $category->parent_id == $c->id ? 'selected="selected"' : null }}> {{ $c->name }}</option>
+                                  @endforeach
+                              </select>
+                          </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label>Slug*</label>
                                 <input type="text" class="form-control" name="slug" value="{{ old('slug', $category->slug) }}" placeholder="Slug*"> 
+                            </div>
+                            <div class="form-group">
+                              <label class="text-info">Created Date</label>
+                              <div class="input-group">
+                                  <div class="input-group-prepend">
+                                      <span class="input-group-text text-info"><i class="fas fa-calendar-alt"></i></span>
+                                  </div>
+                                  <input type="text" class="form-control text-info" value="{{ $category->created_at . ' ('.timeConvert($category->created_at).')' }}" readonly>
+                              </div>
+                              
                             </div>
                         </div>
                         <div class="col-md-12">

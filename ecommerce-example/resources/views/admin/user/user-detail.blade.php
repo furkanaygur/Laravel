@@ -52,33 +52,46 @@
                         <!-- /.card -->
                     </div>
                     <div class="col-md-4">
-                        <label class="text-info">Register Date</label>
-                        <input type="text" class="form-control text-info" value="{{ $user->created_at . ' ('.timeConvert($user->created_at).')' }}" readonly>
+                        
+                        <div class="form-group">
+                            <label class="text-info">Register Date</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info"><i class="fas fa-calendar-alt"></i></span>
+                                </div>
+                                <input type="text" class="form-control text-info" value="{{ $user->created_at . ' ('.timeConvert($user->created_at).')' }}" readonly>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <form action="{{ route('admin.user-update', $user->id) }}" method="POST">
                     {{ csrf_field() }}
                     <div class="row">
                         <div class="col-md-6">
-                        <div class="form-group {{ $errors->has('name') ? 'has-error' : null }}">
-                            <label>Name*</label>
-                            <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" placeholder="Name*">
-                            @if ($errors->has('name'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('name') }}</strong>
-                                </span>
-                            @endif
-                        </div>
-                        <!-- /.form-group -->
-                        <div class="form-group {{ $errors->has('email') ? 'has-error' : null }}">
-                            <label>Email*</label>
-                            <input type="text" class="form-control" name="email" value="{{ old('email', $user->email) }}" placeholder="Email*">
-                            @if ($errors->has('email'))
-                                <span class="help-block">
-                                    <strong class="text-danger">{{ $errors->first('email') }}</strong>
-                                </span>
-                            @endif  
-                        </div>
+                            <div class="form-group {{ $errors->has('name') ? 'has-error' : null }}">
+                                <label>Name*</label>
+                                <input type="text" class="form-control" name="name" value="{{ old('name', $user->name) }}" placeholder="Name*">
+                                @if ($errors->has('name'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <!-- /.form-group -->
+                            <div class="form-group" {{ $errors->has('email') ? 'has-error' : null }}>
+                                <label for="">Email*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-at"></i></span>
+                                    </div>
+                                    <input type="text" name="email" class="form-control" value="{{ old('email', $user->email) }}" placeholder="Email*">
+                                </div>
+                                @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong class="text-danger">{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
                         </div>
                         <!-- /.col -->
                         <div class="col-md-6">
@@ -104,17 +117,17 @@
                                         <strong class="text-danger">{{ $errors->first('phone') }}</strong>
                                     </span>
                                 @endif
-                                {{-- <label>Admin</label>
-                                <select name="is_admin" class="form-control select2" style="width: 100%;">
-                                <option class="text-info" value="0" selected="selected">No</option>
-                                <option class="text-danger" value="1">Yes</option>
-                                </select> --}}
                             </div>
                         </div>
                         <div class="col-md-12">
-                            <div class="form-group {{ $errors->has('address') ? 'has-error' : null }}">
-                                <label>Address*</label>
-                                <textarea class="form-control" name="address" placeholder="Address*" rows="5">{{ old('address', $user->detail->address) }}</textarea>
+                            <div class="form-group" {{ $errors->has('address') ? 'has-error' : null }}>
+                                <label for="">Address*</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+                                    </div>
+                                    <textarea class="form-control" name="address" placeholder="Address*" rows="5">{{ old('address', $user->detail->address) }}</textarea>
+                                </div>
                                 @if ($errors->has('address'))
                                     <span class="help-block">
                                         <strong class="text-danger">{{ $errors->first('address') }}</strong>

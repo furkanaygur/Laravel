@@ -68,13 +68,12 @@ class CategoryController extends Controller
                 $category['parent_id'] = request('parent_id');
             }
 
-
-
             Category::insert($category);
 
             return redirect()->route('admin.categories')->with('message', 'Succesfully Added')
                 ->with('message_type', 'success');
         }
+        
         $categories = Category::all();
         return view('admin.category.add-category', compact('categories'));
     }

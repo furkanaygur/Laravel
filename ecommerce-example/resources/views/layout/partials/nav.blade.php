@@ -90,12 +90,6 @@
                 @foreach ($setting['category'] as $category)
                 <li><a href="{{ route('category', $category->slug) }}">{{ $category->name }}</a></li>
                 @endforeach           
-                
-                {{-- <li><a href="#">And more.. <span class="caret"></span></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">Page2</a></li>                                     
-                  </ul>
-                </li> --}}
               </ul>
             </li>
           </ul>

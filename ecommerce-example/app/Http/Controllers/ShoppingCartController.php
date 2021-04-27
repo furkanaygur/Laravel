@@ -18,7 +18,6 @@ class ShoppingCartController extends Controller
 
     public function add()
     {
-
         $product = Products::with(['categories', 'detail'])->find(request('id'));
         $category = $product->categories->first();
         $category = $category->slug;

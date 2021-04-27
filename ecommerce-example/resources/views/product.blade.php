@@ -20,7 +20,7 @@
          <h2>T-Shirt</h2>
          <ol class="breadcrumb">
            <li><a href="{{ route('user.index') }}">Home</a></li>         
-           <li><a href="{{ route('category', $c->slug) }}">{{ $c->name }}</a></li>
+           <li><a href="{{ route('category', $product->categorySlug) }}">{{ $product->categoryName }}</a></li>
            <li class="active">{{ $product->title }}</li>
          </ol>
        </div>
@@ -68,13 +68,13 @@
                   <div class="aa-product-view-content">
                     <h3>{{ $product->title }}</h3>
                     <div class="aa-price-block">
-                        @if (!is_null($product->detail->old_price))
-                            <span class="aa-product-price"><del>${{ $product->detail->old_price ?? null }}</del></span>
+                        @if (!is_null($product->old_price))
+                            <span class="aa-product-price"><del>${{ $product->old_price ?? null }}</del></span>
                         @endif
                         <span class="aa-product-view-price">${{ $product->price }}</span>
-                      <p class="aa-product-avilability">Avilability: <span>{{ $product->detail->statu != 3 ? 'In stock' : 'SOLD OUT' }}</span></p>
+                      <p class="aa-product-avilability">Avilability: <span>{{ $product->statu != 3 ? 'In stock' : 'SOLD OUT' }}</span></p>
                     </div>
-                    @if ($product->detail->statu != 3 )
+                    @if ($product->statu != 3 )
                         <h4>Size</h4>
                         <div class="aa-prod-view-size">
                         <a href="#">S</a>
@@ -102,7 +102,7 @@
                             </select>
                         </form>
                         <p class="aa-prod-category">
-                            Category: <a href="{{ route('category', $c->slug) }}">{{ $c->name }}</a>
+                            Category: <a href="{{ route('category', $product->categorySlug) }}">{{ $product->categoryName }}</a>
                         </p>
                         </div>
                         
@@ -131,29 +131,6 @@
                 </div>
                 <div class="tab-pane fade " id="review">
                  <div class="aa-product-review-area">
-                   {{-- <h4>2 Reviews for T-Shirt</h4> 
-                   <ul class="aa-review-nav">
-                     <li>
-                        <div class="media">
-                          <div class="media-left">
-                            <a href="#">
-                              <img class="media-object" src="http://via.placeholder.com/150x150?text=Furkan" alt="girl image">
-                            </a>
-                          </div>
-                          <div class="media-body">
-                            <h4 class="media-heading"><strong>Marla Jobs</strong> - <span>March 26, 2016</span></h4>
-                            <div class="aa-product-rating">
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star"></span>
-                              <span class="fa fa-star-o"></span>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                          </div>
-                        </div>
-                      </li>
-                   </ul> --}}
                    <h4>Add a review</h4>
                    <div class="aa-your-rating">
                      <p>Your Rating</p>
@@ -189,20 +166,20 @@
               <h3>Related Products</h3>
               <ul class="aa-product-catg aa-related-item-slider">
                 @foreach ($setting['product'] as $product)
-                    @if ($product->detail->statu == 1)
+                    @if ($product->statu == 2)
                     <li>
                         <figure>
-                          <a class="aa-product-img" href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
+                          <a class="aa-product-img" href="{{ route('category.product',[$product->categorySlug, $product->productSlug]) }}"><img src="http://via.placeholder.com/250x300?text=Furkan" alt="polo shirt img"></a>
                           <form action="{{ route('cart.add') }}" method="POST">
                             {{ csrf_field() }}
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <button style="width: 100%; border: 0px; outline: none;" class="aa-add-card-btn"><span class="fa fa-shopping-cart"></span>Add To Cart</button>
                           </form>
                             <figcaption>
-                            <h4 class="aa-product-title"><a href="{{ route('category.product',[$product->categories[0]->slug, $product->slug]) }}">{{ $product->title }}</a></h4>
+                            <h4 class="aa-product-title"><a href="{{ route('category.product',[$product->categorySlug, $product->productSlug]) }}">{{ $product->title }}</a></h4>
                             <span class="aa-product-price">${{ $product->price }}</span>
-                            @if (!is_null($product->detail->old_price))
-                              <span class="aa-product-price"><del>${{ $product->detail->old_price ?? null }}</del></span>
+                            @if (!is_null($product->old_price))
+                              <span class="aa-product-price"><del>${{ $product->old_price ?? null }}</del></span>
                             @endif
                           </figcaption>
                         </figure>                        

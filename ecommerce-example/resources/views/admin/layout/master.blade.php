@@ -20,8 +20,8 @@
     </div>
 
     <footer style="display: flex; justify-content: space-between; align-items: center; padding: .25rem 1rem" class="main-footer">    
-        <span>
-            <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
+        <span style="font-size: 12px">
+            <strong>Copyright &copy;<a href="https://adminlte.io">AdminLTE.io</a>.</strong>
             All rights reserved.
         </span>
         <span>

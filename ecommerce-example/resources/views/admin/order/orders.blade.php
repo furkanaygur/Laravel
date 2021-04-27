@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Categories</h1>
+            <h1>Orders</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -45,7 +45,11 @@
                           <td>{{$order->email}}</td>
                           <td>{{$order->price}}</td>
                           <td>{{$order->address}}</td>
-                          <td>{{$order->statu}}</td>
+                          <td>
+                            <span class="badge badge-{{ $order->statu == 'Order done' ? 'success' : ($order->statu == 'Wrong order!!!' ? 'danger' : 'info' )  }}">
+                              {{$order->statu}}
+                            </span> 
+                          </td>
                           <td>{{ $order->created_at .' ('.timeConvert($order->created_at).')' }}</td>
                           <td style="display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
                             <div style="display: flex; flex-direction: column; justify-content: space-around; align-items: center">
