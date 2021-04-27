@@ -5,6 +5,9 @@
       <div class="row">
         <div class="col-md-12">
           <div class="aa-header-top-area">
+            <div class="aa-header-top-left">
+              <a target="_blank" style="color:#6e5494; font-size:3.5rem" href="https://github.com/furkanaygur/Laravel/tree/main/ecommerce-example"><i class="fab fa-github"></i></a>
+            </div>
             <div class="aa-header-top-right">
               <ul style="display: flex" class="aa-head-top-nav-right">
                 @guest

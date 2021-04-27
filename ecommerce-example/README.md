@@ -1,5 +1,5 @@
 <p align="center">
-	The design is not mine. I got the design from here =>
+	Design =>
 	<a href="https://www.free-css.com/free-css-templates/page236/dailyshop" target="_blank">Dailyshop</a>
 </p>
 
